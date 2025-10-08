@@ -302,6 +302,20 @@ func (s *GitBugMCPServer) DeleteIssue(ctx context.Context, req *mcp.CallToolRequ
 	}, result, nil
 }
 
+// HelloGitBug returns a greeting message
+func (s *GitBugMCPServer) HelloGitBug(ctx context.Context, req *mcp.CallToolRequest, params *HelloGitBugParams) (*mcp.CallToolResult, any, error) {
+	message := "Hello Git Bug"
+	
+	result := map[string]any{
+		"success": true,
+		"message": message,
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{&mcp.TextContent{Text: message}},
+	}, result, nil
+}
+
 // registerTools registers all git-bug tools with the MCP server
 func (s *GitBugMCPServer) registerTools() {
 	// Create Issue Tool
