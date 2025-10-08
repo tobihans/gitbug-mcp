@@ -276,6 +276,10 @@ type DeleteIssueParams struct {
 	BugID string `json:"bug_id" jsonschema:"required;The ID of the bug to delete"`
 }
 
+// HelloGitBugParams defines parameters for the hello git bug tool (no parameters needed)
+type HelloGitBugParams struct {
+}
+
 // DeleteIssue removes a bug from git-bug
 func (s *GitBugMCPServer) DeleteIssue(ctx context.Context, req *mcp.CallToolRequest, params *DeleteIssueParams) (*mcp.CallToolResult, any, error) {
 	output, err := runGitBugCommand(ctx, "bug", "rm", params.BugID)
