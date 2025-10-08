@@ -359,6 +359,12 @@ func (s *GitBugMCPServer) registerTools() {
 		Name:        "delete_issue",
 		Description: "Remove a bug from git-bug",
 	}, s.DeleteIssue)
+
+	// Hello Git Bug Tool
+	mcp.AddTool(s.Server, &mcp.Tool{
+		Name:        "hello_git_bug",
+		Description: "Returns a greeting message 'Hello Git Bug'",
+	}, s.HelloGitBug)
 }
 
 func main() {
