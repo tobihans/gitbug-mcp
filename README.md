@@ -1,6 +1,10 @@
 # Git-Bug MCP Server
 
-A Model Context Protocol (MCP) server that provides tools to interact with [git-bug](https://github.com/git-bug/git-bug), a distributed bug tracker embedded in Git.
+> [!CAUTION]
+> Use at your own risk.
+> I haven't reviewed the code yet. This is just an experiment of mine.
+
+A (vibe-coded) Model Context Protocol (MCP) server that provides tools to interact with [git-bug](https://github.com/git-bug/git-bug), a distributed bug tracker embedded in Git.
 
 ## Features
 
