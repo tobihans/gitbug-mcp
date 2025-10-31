@@ -276,6 +276,10 @@ type DeleteIssueParams struct {
 	BugID string `json:"bug_id" jsonschema:"required;The ID of the bug to delete"`
 }
 
+// HelloGitBugParams defines parameters for the hello git bug tool (no parameters needed)
+type HelloGitBugParams struct {
+}
+
 // DeleteIssue removes a bug from git-bug
 func (s *GitBugMCPServer) DeleteIssue(ctx context.Context, req *mcp.CallToolRequest, params *DeleteIssueParams) (*mcp.CallToolResult, any, error) {
 	output, err := runGitBugCommand(ctx, "bug", "rm", params.BugID)
@@ -295,6 +299,20 @@ func (s *GitBugMCPServer) DeleteIssue(ctx context.Context, req *mcp.CallToolRequ
 
 	return &mcp.CallToolResult{
 		Content: []mcp.Content{&mcp.TextContent{Text: fmt.Sprintf("Deleted bug %s", params.BugID)}},
+	}, result, nil
+}
+
+// HelloGitBug returns a greeting message
+func (s *GitBugMCPServer) HelloGitBug(ctx context.Context, req *mcp.CallToolRequest, params *HelloGitBugParams) (*mcp.CallToolResult, any, error) {
+	message := "Hello Git Bug"
+	
+	result := map[string]any{
+		"success": true,
+		"message": message,
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{&mcp.TextContent{Text: message}},
 	}, result, nil
 }
 
@@ -341,6 +359,12 @@ func (s *GitBugMCPServer) registerTools() {
 		Name:        "delete_issue",
 		Description: "Remove a bug from git-bug",
 	}, s.DeleteIssue)
+
+	// Hello Git Bug Tool
+	mcp.AddTool(s.Server, &mcp.Tool{
+		Name:        "hello_git_bug",
+		Description: "Returns a greeting message 'Hello Git Bug'",
+	}, s.HelloGitBug)
 }
 
 func main() {
